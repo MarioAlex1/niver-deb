@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/src/style.css" />
     <link rel="stylesheet" href="/src/surprise.css" />
     <link rel="stylesheet" href="/src/scratch.css" />
+    <link rel="stylesheet" href="/src/adventure.css" />
   </head>
   <body>
     <div class="grain" aria-hidden="true"></div>
@@ -167,7 +168,33 @@
       </div>
       <div class="heart-burst" id="heartBurst" aria-hidden="true"></div>
     </div>
+    <div class="love-call" id="loveCall" role="dialog" aria-modal="true" aria-labelledby="callerName">
+      <div class="call-phone">
+        <div class="call-status">chamada de amor…</div>
+        <div class="caller-avatar">♡<i></i><i></i><i></i></div>
+        <h2 id="callerName">O amor da sua vida</h2>
+        <p>está ligando para você</p>
+        <div class="call-actions">
+          <button id="declineCall" class="decline-call"><span>×</span><small>depois</small></button>
+          <button id="acceptCall" class="accept-call"><span>♥</span><small>atender</small></button>
+        </div>
+      </div>
+    </div>
+    <button class="call-again" id="callAgain" aria-label="Abrir ligação do amor">♥<span>uma ligação para você</span></button>
+    <div class="hunt-counter" id="huntCounter"><span>♥</span><strong id="heartCount">0</strong><small>/ 19 encontrados</small></div>
+    <div class="love-toast" id="loveToast" aria-live="polite"></div>
+    <div class="constellation-modal" id="constellationModal" role="dialog" aria-modal="true" aria-labelledby="constellationTitle">
+      <canvas id="starCanvas"></canvas>
+      <button id="constellationClose" aria-label="Fechar constelação">×</button>
+      <div class="constellation-copy">
+        <span>missão cumprida · 19 de 19</span>
+        <h2 id="constellationTitle">Em qualquer universo,<br><em>eu encontraria você.</em></h2>
+        <p>Talvez todas as estrelas só existam para lembrar que algumas pessoas estavam destinadas a se encontrar.</p>
+        <strong>e a minha pessoa sempre será você. ♡</strong>
+      </div>
+    </div>
     <footer>feito à mão, com amor &nbsp;·&nbsp; 2026</footer>
     <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/adventure.js"></script>
   </body>
 </html>
