@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=Sacramento&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/src/surprise.css" />
   </head>
   <body>
     <div class="grain" aria-hidden="true"></div>
@@ -93,16 +94,33 @@
         <p class="memory-note reveal">Que sorte a minha poder viver<br>e registrar tudo isso com você.</p>
       </section>
 
+      <section class="heart-vault section" id="surpresa">
+        <div class="vault-copy reveal">
+          <span class="chapter">psiu… tem mais uma coisa</span>
+          <h2>Um segredo<br><em>só nosso.</em></h2>
+          <p>Algumas coisas bonitas não se abrem com senha. Se abrem com carinho.</p>
+        </div>
+        <div class="hold-zone reveal">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <button class="hold-heart" id="holdHeart" aria-label="Pressione e segure para abrir a surpresa">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-bg" cx="60" cy="60" r="53"></circle><circle class="ring-progress" id="ringProgress" cx="60" cy="60" r="53"></circle></svg>
+            <span class="heart-symbol">♥</span>
+          </button>
+          <strong id="holdLabel">pressione e segure</strong>
+          <small>não solte meu coração ♡</small>
+        </div>
+      </section>
+
       <section class="playlist section" id="playlist">
         <div class="vinyl reveal"><div class="vinyl-label">our<br>songs</div></div>
         <div class="playlist-copy reveal">
           <span class="chapter">03 — nossa trilha sonora</span>
-          <h2>Quatro músicas.<br><em>Uma só pessoa.</em></h2>
-          <p>Algumas músicas têm o seu cheiro, o seu sorriso, a sua presença. Essas quatro sempre me levam de volta para você.</p>
-          <div class="qr-card">
-            <img src="/photos/16.jpeg" alt="QR code da nossa playlist com quatro músicas da Lana Del Rey">
-            <div><strong>escaneie para ouvir</strong><span>Lana Del Rey · para nós ♡</span></div>
-          </div>
+          <h2>Cinco músicas.<br><em>Uma só pessoa.</em></h2>
+          <p>Algumas músicas têm o seu cheiro, o seu sorriso, a sua presença. Essas cinco sempre me levam de volta para você.</p>
+          <a class="qr-card" href="https://youtube.com/playlist?list=PLHw7Wyy1nAmA&amp;si=15jNbor4XTD0LDB1" target="_blank" rel="noopener noreferrer" aria-label="Abrir nossa playlist no YouTube">
+            <img src="/photos/16.jpeg" alt="QR code da nossa playlist com cinco músicas da Lana Del Rey">
+            <div><strong>toque para ouvir <i>↗</i></strong><span>Lana Del Rey · para nós ♡</span></div>
+          </a>
         </div>
       </section>
 
@@ -116,6 +134,20 @@
         </div>
       </section>
     </main>
+    <div class="secret-modal" id="secretModal" role="dialog" aria-modal="true" aria-labelledby="secretTitle">
+      <div class="secret-glow"></div>
+      <button class="secret-close" id="secretClose" aria-label="Fechar surpresa">×</button>
+      <div class="secret-card">
+        <div class="secret-photo"><img src="/photos/14.jpeg" alt="Um dos nossos momentos especiais"></div>
+        <div class="secret-message">
+          <span>você conseguiu abrir ♡</span>
+          <h2 id="secretTitle">Meu lugar seguro<br><em>é você.</em></h2>
+          <p id="typedSecret"></p>
+          <div class="secret-sign">em todas as vidas, eu escolheria você.</div>
+        </div>
+      </div>
+      <div class="heart-burst" id="heartBurst" aria-hidden="true"></div>
+    </div>
     <footer>feito à mão, com amor &nbsp;·&nbsp; 2026</footer>
     <script type="module" src="/src/main.js"></script>
   </body>
