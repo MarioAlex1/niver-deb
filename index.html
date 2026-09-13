@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=Sacramento&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/style.css" />
     <link rel="stylesheet" href="/src/surprise.css" />
+    <link rel="stylesheet" href="/src/scratch.css" />
   </head>
   <body>
     <div class="grain" aria-hidden="true"></div>
@@ -79,6 +80,24 @@
         <ol class="reason-list extra" id="extraReasons">
           <li><b>07</b><span>Seus cachinhos — uma obra de arte.</span></li><li><b>08</b><span>Seu coração enorme.</span></li><li><b>09</b><span>O jeito que você me faz sentir em casa.</span></li><li><b>10</b><span>Nossas fotos espontâneas.</span></li><li><b>11</b><span>Seu olhar cheio de vida.</span></li><li><b>12</b><span>Sua força, mesmo quando você não percebe.</span></li><li><b>13</b><span>Cada detalhe que faz você ser você.</span></li><li><b>14</b><span>As nossas brincadeiras sem sentido.</span></li><li><b>15</b><span>O carinho em cada pequeno gesto.</span></li><li><b>16</b><span>Os sonhos que ainda vamos realizar.</span></li><li><b>17</b><span>Quem eu sou quando estou com você.</span></li><li><b>18</b><span>Todas as memórias que já construímos.</span></li><li><b>19</b><span>E, acima de tudo, amo você inteirinha.</span></li>
         </ol>
+      </section>
+
+      <section class="scratch-section section" id="raspadinha">
+        <div class="scratch-heading reveal">
+          <span class="chapter">uma surpresa para tocar</span>
+          <h2>Raspe para revelar<br><em>um pedacinho de nós.</em></h2>
+          <p>Use o dedo devagar. Algumas das melhores coisas da vida aparecem aos pouquinhos.</p>
+        </div>
+        <div class="scratch-wrap reveal" id="scratchWrap">
+          <div class="scratch-photo">
+            <img src="/photos/11.jpeg" alt="Uma lembrança carinhosa de nós dois">
+            <div class="scratch-reveal-copy"><small>surpresa!</small><strong>meu momento favorito<br>é qualquer um com você.</strong><span>♡</span></div>
+          </div>
+          <canvas id="scratchCanvas" aria-label="Raspe com o dedo para revelar a foto"></canvas>
+          <div class="scratch-sparkles" id="scratchSparkles" aria-hidden="true"></div>
+        </div>
+        <div class="scratch-instruction" id="scratchInstruction"><i>☝</i><span>deslize o dedo sobre a imagem</span></div>
+        <button class="scratch-skip" id="scratchSkip">revelar a surpresa</button>
       </section>
 
       <section class="memories section">

@@ -111,3 +111,90 @@ holdHeart.addEventListener('contextmenu', (event) => event.preventDefault());
 document.querySelector('#secretClose').addEventListener('click', closeSecret);
 secretModal.addEventListener('click', (event) => { if (event.target === secretModal) closeSecret(); });
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeSecret(); });
+
+// Raspadinha tátil: revela uma memória conforme o dedo percorre a foto.
+const scratchCanvas = document.querySelector('#scratchCanvas');
+const scratchWrap = document.querySelector('#scratchWrap');
+const scratchSkip = document.querySelector('#scratchSkip');
+const scratchInstruction = document.querySelector('#scratchInstruction');
+const scratchSparkles = document.querySelector('#scratchSparkles');
+const scratchContext = scratchCanvas.getContext('2d', { willReadFrequently: true });
+let scratching = false;
+let scratchDone = false;
+let scratchChecks = 0;
+
+function prepareScratch() {
+  if (scratchDone) return;
+  const box = scratchWrap.getBoundingClientRect();
+  const ratio = Math.min(window.devicePixelRatio || 1, 2);
+  scratchCanvas.width = Math.round(box.width * ratio);
+  scratchCanvas.height = Math.round(box.height * ratio);
+  scratchContext.setTransform(ratio, 0, 0, ratio, 0, 0);
+  const gradient = scratchContext.createLinearGradient(0, 0, box.width, box.height);
+  gradient.addColorStop(0, '#d8899d'); gradient.addColorStop(1, '#7d2947');
+  scratchContext.fillStyle = gradient;
+  scratchContext.fillRect(0, 0, box.width, box.height);
+  scratchContext.fillStyle = 'rgba(255,255,255,.92)';
+  scratchContext.textAlign = 'center';
+  scratchContext.textBaseline = 'middle';
+  scratchContext.font = `${Math.min(34, box.width / 10)}px Sacramento`;
+  scratchContext.fillText('um segredo escondido aqui ♡', box.width / 2, box.height / 2);
+  scratchContext.font = '10px DM Sans';
+  scratchContext.letterSpacing = '3px';
+  scratchContext.fillText('RASPE COM CARINHO', box.width / 2, box.height / 2 + 42);
+  for (let i = 0; i < 55; i++) {
+    scratchContext.globalAlpha = .08 + Math.random() * .14;
+    scratchContext.fillStyle = '#fff';
+    scratchContext.beginPath();
+    scratchContext.arc(Math.random() * box.width, Math.random() * box.height, Math.random() * 2 + .5, 0, Math.PI * 2);
+    scratchContext.fill();
+  }
+  scratchContext.globalAlpha = 1;
+}
+
+function scratchAt(event) {
+  if (!scratching || scratchDone) return;
+  event.preventDefault();
+  const rect = scratchCanvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+  scratchContext.globalCompositeOperation = 'destination-out';
+  scratchContext.beginPath();
+  scratchContext.arc(x, y, Math.max(28, rect.width * .075), 0, Math.PI * 2);
+  scratchContext.fill();
+  scratchInstruction.classList.add('hidden');
+  if (++scratchChecks % 9 === 0) checkScratchProgress();
+}
+
+function checkScratchProgress() {
+  const pixels = scratchContext.getImageData(0, 0, scratchCanvas.width, scratchCanvas.height).data;
+  let clear = 0;
+  for (let i = 3; i < pixels.length; i += 64) if (pixels[i] < 40) clear++;
+  if (clear / (pixels.length / 64) > .42) finishScratch();
+}
+
+function finishScratch() {
+  if (scratchDone) return;
+  scratchDone = true;
+  scratching = false;
+  scratchWrap.classList.add('discovered');
+  scratchInstruction.innerHTML = '<i>♡</i><span>você encontrou mais um pedacinho do meu coração</span>';
+  scratchInstruction.classList.remove('hidden');
+  scratchSkip.hidden = true;
+  if (navigator.vibrate) navigator.vibrate(80);
+  for (let i = 0; i < 20; i++) {
+    const sparkle = document.createElement('i');
+    sparkle.textContent = i % 3 ? '✦' : '♥';
+    sparkle.style.setProperty('--sx', `${Math.random() * 100}%`);
+    sparkle.style.setProperty('--sy', `${Math.random() * 100}%`);
+    sparkle.style.setProperty('--sd', `${Math.random() * .5}s`);
+    scratchSparkles.appendChild(sparkle);
+  }
+}
+
+scratchCanvas.addEventListener('pointerdown', (event) => { scratching = true; scratchCanvas.setPointerCapture(event.pointerId); scratchAt(event); });
+scratchCanvas.addEventListener('pointermove', scratchAt);
+scratchCanvas.addEventListener('pointerup', () => { scratching = false; checkScratchProgress(); });
+scratchCanvas.addEventListener('pointercancel', () => { scratching = false; });
+scratchSkip.addEventListener('click', finishScratch);
+new ResizeObserver(prepareScratch).observe(scratchWrap);
